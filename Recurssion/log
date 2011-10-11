@@ -39,7 +39,7 @@
 130>>palindrome 1 - true palindrome -> racecar [pass] (1)
 130>>palindrome 2 - false palindrome [pass] (1)
 130>>palindrome 3 - true palindrome number [pass] (1)
-130>>palindrome 4 - fail palindrome [pass] (1)
+130>>palindrome 4 - empty palindrome [pass] (1)
 130>>palindrome 5 - single palindrome [pass] (1)
 130>>listReverse 1 - regular case [pass] (1)
 130>>listReverse 2 - number reversing [pass] (1)

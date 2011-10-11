@@ -1,0 +1,40 @@
+130>>Uncaught Exception: Failure("to be implemented")130>>Uncaught Exception: Failure("to be implemented")130>>Uncaught Exception: Failure("to be implemented")130>>Uncaught Exception: Failure("to be implemented")130>>Uncaught Exception: Failure("to be implemented")130>>Uncaught Exception: Failure("to be implemented")130>>sample: assoc 1 [pass] (1)
+130>>sample: assoc 2 [pass] (1)
+130>>sample: removeDuplicates 2 [pass] (1)
+130>>sample: removeDuplicates 2 [pass] (1)
+130>>sample: wwhile 1 [pass] (1)
+130>>sample: fixpoint 1 [pass] (1)
+130>>sample: eval_fn 1: manual [pass] (1)
+130>>sample: eval_fn 2: manual [pass] (1)
+130>>sample: gray 1 : manual [error: exception] (1)
+130>>sample: gray 2 : manual [error: exception] (1)
+130>>sample: gray 3 : manual [error: exception] (1)
+130>>sample: color 1 : manual [error: exception] (1)
+130>>sample: color 2 : manual [error: exception] (1)
+130>>sample: color 3 : manual [error: exception] (1)
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>WARNING: INVALID TEST THROWS EXCEPTION!!: Failure("TBD:output") 
+
+130>>Results: Score/Max = 8 / 14 
+130>>Compiled

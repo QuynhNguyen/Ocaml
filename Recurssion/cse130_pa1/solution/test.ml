@@ -265,9 +265,9 @@ let yourTests =
   );
   (fun () -> mkTest 
      palindrome
-     "10000001000"
-     false
-     "palindrome 4 - fail palindrome"
+     ""
+     true
+     "palindrome 4 - empty palindrome"
   );
   (fun () -> mkTest 
      palindrome

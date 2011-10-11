@@ -4,7 +4,6 @@ type test = unit -> string
 
 let key = "" (* change *)
 let prefix130 = "130" (* change *)
-
 let print130 s = print_string (prefix130^">>"^s)
 
 exception ErrorCode of string
@@ -51,6 +50,9 @@ let implode cs =
 
 let drop_paren s = 
   implode (List.filter (fun c -> not (List.mem c ['(';' ';')'])) (explode s))
+
+let eq_real p (r1,r2) = 
+  (r1 -. r2) < p || (r2 -. r1) < p
 
 let mkTest f x y name = runTest ((f, x, y), 1, name)
 
