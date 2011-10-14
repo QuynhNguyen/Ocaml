@@ -12,6 +12,8 @@ type expr =
   | Average  of expr * expr
   | Times    of expr * expr
   | Thresh   of expr * expr * expr * expr	
+  | Max 	 of expr * expr
+  | Cubic    of expr * expr * expr
 
 (* exprToString : expr -> string
    Complete this function to convert an expr to a string 
@@ -24,7 +26,9 @@ let rec exprToString e =
 	|Sine e -> "sin(pi*" ^ (exprToString e) ^ ")"
 	|Average (e1,e2) -> "((" ^ (exprToString e1) ^ "+" ^ (exprToString e2) ^ ")/2)"
 	|Times (e1,e2) -> (exprToString e1) ^ "*" ^ (exprToString e2)
-	|Thresh (e1,e2,e3,e4) -> "("  ^ (exprToString e1) ^ "<" ^ (exprToString e2) ^ "?" ^ (exprToString e3) ^ ":" ^ (exprToString e4) ^ ")"
+	|Max(e1,e2) -> "(" ^(exprToString e1)^ " >= " ^ (exprToString e2)  ^ "?" ^ (exprToString e1) ^  " :" ^ (exprToString e2) ^ ")" (*e1>=e2?e1:e2*)
+	|Cubic(e1,e2,e3) -> "(cos(pi*" ^ (exprToString e1) ^ ") + sin(pi*" ^ (exprToString e2) ^ ") ) * " ^ "cos(pi*" ^(exprToString e3) ^")"
+	|Thresh (e1,e2,e3,e4) -> (exprToString e1) ^ "*" ^ (exprToString e2) ^ "*" ^ (exprToString e3) 
 
 (* build functions:
      Use these helper functions to generate elements of the expr
@@ -38,6 +42,8 @@ let buildCosine(e)                 = Cosine(e)
 let buildAverage(e1,e2)            = Average(e1,e2)
 let buildTimes(e1,e2)              = Times(e1,e2)
 let buildThresh(a,b,a_less,b_less) = Thresh(a,b,a_less,b_less)
+let buildMax(e1,e2) 			   = Max(e1,e2)
+let buildCubic(e1,e2,e3)		   = Cubic(e1,e2,e3)
 
 
 let pi = 4.0 *. atan 1.0
@@ -54,6 +60,8 @@ let rec eval (e,x,y) =
 		|Average (e1,e2) -> (((eval (e1,x,y))+.(eval (e2,x,y))) /. (2.0))
 		|Times (e1,e2) -> (eval(e1,x,y)) *. (eval (e2,x,y))
 		|Thresh (e1,e2,e3,e4) -> (if (eval (e1,x,y)) < (eval (e2,x,y)) then (eval (e3,x,y)) else (eval (e4,x,y)))
+		|Max(e1,e2) -> (if (eval (e1,x,y)) >= (eval (e2,x,y)) then (eval (e1,x,y)) else (eval (e2,x,y)))
+		|Cubic(e1,e2,e3) -> eval(e1,x,y) *. eval(e2,x,y) *. eval(e3,x,y)
 
 let eval_fn e (x,y) = 
   let rv = eval (e,x,y) in

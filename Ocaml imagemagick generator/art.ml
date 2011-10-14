@@ -20,10 +20,35 @@
 (*rand is tuple which take 2 input (int * int) which yield the output int
  * dept is an int input
  * rand * depth -> int
+ Example:
+      let rand = makeRand(10,39) in 
+      let x =  rand(1,4) in 
+          (* x is 1,2,3, or 4 *)
+build(makeRand(10,39),5);;
 *)
 let rec build (rand,depth) = 
-	
-	Cosine VarX;;
+	let pumping = 1+rand(0,7) in
+	let alternate = rand(0, pumping) in
+	if depth == 0 then (
+		if alternate mod 2 == 0 then
+			buildX() 
+		else
+			buildY()
+	)
+	else begin
+		let x = rand(0,9) in
+			let result = match x with
+			|0 -> build(rand, (depth-1))
+			|1 -> build(rand, (depth-1))
+			|2 -> buildSine(build(rand, (depth-1))) 
+			|3 -> buildCosine(build(rand, (depth - 1)))
+			|4 -> buildAverage(build(rand, (depth-1)),build(rand, (depth-1)))
+			|5 -> buildTimes(build(rand, (depth-1)),build(rand, (depth-1)))
+			|6 -> buildMax(build(rand, (depth-1)),build(rand, (depth-1)))
+			|7 -> buildCubic(build(rand, (depth-1)),build(rand, (depth-1)),build(rand, (depth-1)))
+			|_ -> buildThresh(build(rand, (depth-1)),build(rand, (depth-1)),build(rand, (depth-1)),build(rand, (depth-1)))
+		in result
+	end
 
 
 (* g1,g2,g3,c1,c2,c3 : unit -> int * int * int
@@ -32,13 +57,13 @@ let rec build (rand,depth) =
  * they should return (depth,seed1,seed2)
  *)
 
-let g1 () = failwith "to be implemented"  
-let g2 () = failwith "to be implemented"  
-let g3 () = failwith "to be implemented"  
+let g1 () = (6,10,25) 
+let g2 () = (6,12,30)  
+let g3 () = (5,90,200)
 
-let c1 () = failwith "to be implemented"
-let c2 () = failwith "to be implemented" 
-let c3 () = failwith "to be implemented" 
+let c1 () = (12,12,12)
+let c2 () = (4,200,250)
+let c3 () = (6,700,800) 
 
 
 (******************** Random Number Generators ************)
@@ -59,7 +84,6 @@ let makeRand (seed1, seed2) =
   let seed = (Array.of_list [seed1;seed2]) in
   let s = Random.State.make seed in
   (fun (x,y) -> (x + (Random.State.int s (y-x))))
-
 
 let rec rseq g r n =
   if n <= 0 then [] else (g r)::(rseq g r (n-1))
@@ -97,6 +121,7 @@ let rec ffor (low,high,f) =
  but it's essentially a one-line header followed by
  one byte (representing gray value 0..255) per pixel.
  *)
+
 
 let emitGrayscale (f,n,name) =
     (* Open the output file and write the header *)

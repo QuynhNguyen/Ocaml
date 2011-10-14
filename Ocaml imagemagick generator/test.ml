@@ -104,78 +104,128 @@ let yourTests =
   [ 
   (fun () -> mkTest
      assoc
-     (failwith "TBD:input") 
-     (failwith "TBD:output") 
-     "assoc 1"
+     (-1, "quynh", [("quynh",1);("tom",2);("jerry",3)])
+     1 
+     "assoc 1 - regular case"
   );
   (fun () -> mkTest
      assoc
-     (failwith "TBD:input") 
-     (failwith "TBD:output") 
-     "assoc 2"
+     (-1, "unknown", [("known",4);("annon",5);("mystery",6)]) 
+    ( -1 )
+     "assoc 2 - not found"
   );
   (fun () -> mkTest
      assoc
-     (failwith "TBD:input") 
-     (failwith "TBD:output") 
-     "assoc 3"
+     (-1, "QUYNH", [("quynh",1);("qUynH",2);("hnyuq",3)])
+     (-1)
+     "assoc 3 - case SenSiTive"
+  );
+
+  (fun () -> mkTest
+     assoc
+     (-1, "", [("",11);(" ",22);("[]",33)])
+     11
+     "assoc 4 - Empty String"
+  );
+
+  (fun () -> mkTest
+     assoc
+    (-1, "quynh", [("quynh",1);("quynh",2);("quynh",3)])
+     1
+     "assoc 5 - Duplication"
   );
 
   (fun () -> mkTest 
     removeDuplicates
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
-     "removeDuplicates 1"
+   [1;2;3;3;4;5;6;6;7]
+   [1;2;3;4;5;6;7] 
+    "removeDuplicates 1 - normal case"
   );
   (fun () -> mkTest 
     removeDuplicates
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
-     "removeDuplicates 2"
+    [0;0;0;0;0] 
+    [0] 
+     "removeDuplicates 2 - nothing but 0s"
   );
   (fun () -> mkTest 
     removeDuplicates
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
-     "removeDuplicates 3"
+    [1;2;2;2;2;2;2;2;2;2;3] 
+    [1;2;3]
+     "removeDuplicates 3 - the middle guy"
+  );
+  (fun () -> mkTest 
+    removeDuplicates
+    []
+    []
+     "removeDuplicates 4 - empty list"
+  );
+  (fun () -> mkTest 
+    removeDuplicates
+    [1;2;3;4]
+    [1;2;3;4]
+     "removeDuplicates 5 - nothing to remove"
   );
 
   (fun () -> mkTest 
     wwhile 
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
-    "wwhile 1"
+    ((fun x -> let xx = x*x in (xx, xx < 100)), 2) 
+    256
+    "wwhile 1 - double X"
   );
   (fun () -> mkTest 
     wwhile 
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
-    "wwhile 2"
+    ((fun x -> let xx = (x*x*x*x) in (xx, xx < 100)), 2)  
+    65536
+    "wwhile 2 - quad x"
   );
   (fun () -> mkTest 
     wwhile 
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
-    "wwhile 3"
+    ((fun x -> let xx = x*x*x in (xx, xx < 100)), 3) 
+    19683
+    "wwhile 3 - 3 as base - hattrick"
+  );
+(fun () -> mkTest 
+    wwhile 
+    ((fun x -> let xx = x*x in (xx, xx < 100)), 3) 
+    6561
+    "wwhile 4 - double tap base 3"
+  );
+(fun () -> mkTest 
+    wwhile 
+    ((fun x -> let xx = x*x in (xx, xx < 1)), 1) 
+    1
+    "wwhile 5 - 1"
   );
   
   (fun () -> mkTest 
     fixpoint 
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
+    ((fun x -> truncate (1e2 *. sin (1e-6 *. float x))), 2)
+    0 
     "fixpoint 1"
   );
   (fun () -> mkTest 
     fixpoint 
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
+    ((fun x -> truncate (1e3 *. cos (1e-6 *. float x))), 0)
+    999
     "fixpoint 2"
   );
   (fun () -> mkTest 
     fixpoint 
-    (failwith "TBD:input") 
-    (failwith "TBD:output") 
+    ((fun x -> truncate (1e3 *. tan (1e-6 *. float x))), 0)
+    0
     "fixpoint 3"
+  );
+(fun () -> mkTest 
+    fixpoint 
+    ((fun x -> truncate (1e3 *. cos (1e-3 *. float x))), 0)
+    739
+    "fixpoint 4"
+  );
+(fun () -> mkTest 
+    fixpoint 
+    ((fun x -> truncate (1e3 +. cos (1e-3 *. float x))), 0)
+    1000
+    "fixpoint 5"
   );
   ]
 
